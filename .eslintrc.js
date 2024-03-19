@@ -1,7 +1,10 @@
 // eslint-disable-next-line no-undef
 module.exports = {
   env: {
-    browser: true,
+    commonjs: true,
+    es2021: true,
+    node: true,
+    // browser: true,
     es6: true,
     "jest/globals": true,
   },
@@ -22,6 +25,7 @@ module.exports = {
     eqeqeq: "error",
     "no-trailing-spaces": "error",
     "object-curly-spacing": ["error", "always"],
+    "no-console": "error", // Add this line
     "arrow-spacing": ["error", { before: true, after: true }],
     "react/prop-types": 0,
   },

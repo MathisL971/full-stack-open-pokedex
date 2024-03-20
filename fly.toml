@@ -30,7 +30,7 @@ primary_region = 'iad'
   path = "/health"
 
 [deploy]
-  strategy = "canary"
+  strategy = "bluegreen"
 
 [[vm]]
   memory = '1gb'

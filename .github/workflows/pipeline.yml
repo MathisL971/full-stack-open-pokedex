@@ -31,8 +31,17 @@ jobs:
           # command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:3001
+      - name: Check commit messages
+        id: check_message
+        run: |
+          commit_messages=$(git log --format=%B -n 1 ${{ github.event.after }})
+          if echo "$commit_messages" | grep -q "#skip"; then
+            echo "::set-output name=skip::true"
+          else
+            echo "::set-output name=skip::false"
+          fi
       - name: Fly Deploy
-        if: false
+        if: ${{ github.event_name == 'push' && steps.check_message.outputs.skip == 'false' }}
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
